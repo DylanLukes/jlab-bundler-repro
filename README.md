@@ -3,9 +3,9 @@
 This is to demonstrate a bug in the JupyterLab bundler. It consists of 3
 packages in a monorepo setup:
 
- [`@testtest/foo-package`](./packages/foo): A top-level JupyterLab extension
- [`@testtest/bar-package`](./packages/bar): A dependency of foo
- [`@testtest/batman-leaf`](./packages/batman): A grandchild dependency of foo
+ - [`@testtest/foo-package`](./packages/foo): A top-level JupyterLab extension
+ - [`@testtest/bar-package`](./packages/bar): A dependency of foo
+ - [`@testtest/batman-leaf`](./packages/batman): A grandchild dependency of foo
 
 None of these packages are on NPM.
 
