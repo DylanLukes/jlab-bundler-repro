@@ -1,0 +1,11 @@
+{
+    "name": "@testtest/foo-package",
+    "version": "0.0.1",
+    "description": "The top-level package that gets loaded by JupyterLab",
+    "dependencies": {
+        "@testtest/bar-package": "0.0.1"
+    },
+    "jupyterlab": {
+        "extension": true
+    }
+}

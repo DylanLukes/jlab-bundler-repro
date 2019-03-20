@@ -1,0 +1,6 @@
+{
+    "name": "@testtest/batman-leaf",
+    "description": "a very important leaf package",
+    "version": "0.0.1",
+    "main": "index.js"
+}
