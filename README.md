@@ -1,11 +1,10 @@
 # About this repo
 
-This is to demonstrate a bug in the JupyterLab bundler. It consists of 3
+This is to demonstrate a bug in the JupyterLab bundler. It consists of 2
 packages in a monorepo setup:
 
  - [`@testtest/foo-package`](./packages/foo): A top-level JupyterLab extension
  - [`@testtest/bar-package`](./packages/bar): A dependency of foo
- - [`@testtest/batman-leaf`](./packages/batman): A grandchild dependency of foo
 
 None of these packages are on NPM.
 
@@ -14,9 +13,8 @@ None of these packages are on NPM.
 Link each package:
 
 ```bash
-jupyter labextension link ./packages/batman --no-build
 jupyter labextension link ./packages/bar --no-build
-jupyter labextension install ./package/foo  --no-build # can also use link
+jupyter labextension install ./packages/foo  --no-build # can also use link
 ```
 
 Now attempt a build:
@@ -25,18 +23,20 @@ Now attempt a build:
 jupyter lab build
 ```
 
-It will fail when attempting to build `bar-package`:
+It will fail when attempting to build `foo-package`:
 
 ```
-Couldn't find package "@testtest/batman-leaf@0.0.1" required by "@testtest/bar-package@file:linked_packages/testtest-bar-package-0.0.1-26a01b6e57a23185b090ca63cdbb71fc934dec47.tgz" on the "npm" registry.
+error Couldn't find package "@testtest/bar-package@0.0.1" required by "@testtest/foo-package@file:../extensions/testtest-foo-package-0.0.1-4d0581e7f6dd15a9948804ef4f3e5f3ab7859758.tgz" on the "npm" registry.
 ```
 
-# Cause
+# Causebar
 
-What's happening is that when `foo-package` is loaded, the dependency on
+~~What's happening is that when `foo-package` is loaded, the dependency on
 `bar-package` is correctly transformed to point to the link. However, this
 process is not recursive: `bar-package` has a dependency on `batman-leaf`, but
-that dependency is not transformed by the build toolchain.
+that dependency is not transformed by the build toolchain.~~
+
+Apparently not, as this doesn't work for 2 layers either!
 
 The practical effect of this is nil *IFF* `batman-leaf` is already published on
 NPM: Yarn will either see that the linked version is newer (by versioning) or it
