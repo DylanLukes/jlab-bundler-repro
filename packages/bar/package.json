@@ -2,7 +2,7 @@
     "name": "@testtest/bar-package",
     "version": "0.0.1",
     "dependencies": {
-        "@testtest/batman-leaf": "0.0.1"
+        
     },
     "main": "index.js"
 }
